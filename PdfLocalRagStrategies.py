@@ -2,7 +2,9 @@
 #!ollama pull llama3
 # !ollama pull nomic-embed-text
 # install poppler id strategy is hi_res
-# unstructered API can only process one pdf by one.
+# unstructered API can only process ONE pdf by one, vbut fast strategie can process an entire directory
+# not using api. 
+
 
 import os
 from unstructured.partition.pdf import partition_pdf
@@ -52,7 +54,7 @@ def preprocess_pdfs(directory):
   return resp.elements[:3]
 
 
-pdf_elements = preprocess_pdfs("pdfs")
+pdf_elements = preprocess_pdfs("pdfscc")
 
 """
 # chunking

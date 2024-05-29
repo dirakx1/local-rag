@@ -1,1 +1,6 @@
 .env*
+*/.pdf*
+*/*.pdf 
+__pycache__/*
+*.jsonl
+*.json
