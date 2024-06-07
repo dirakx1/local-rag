@@ -1,4 +1,4 @@
-# General notes: Run first requirements and
+# General notes: Run first requirements and  conda activate localrag
 # !ollama pull llama3
 # !ollama pull nomic-embed-text
 # install poppler id strategy is hi_res
@@ -30,10 +30,16 @@ def preprocess_pdfs(directory):
     for root, _, files in os.walk(directory):
         for file in files:
             if file.endswith(".pdf"):
-                elems = partition_pdf(filename=os.path.join(root,file), languages=['esp'], strategy="fast")
+                elems = partition_pdf(
+                    filename=os.path.join(root,file),
+                    include_page_breaks=True,
+                    infer_table_structure=True,
+                    languages=['esp'], 
+                    strategy="fast")
                 elements.extend(elems)
-    return elements
-
+                
+        return elements
+    
 pdf_elements = preprocess_pdfs("pdfscc")
 
 
@@ -46,7 +52,7 @@ for element in chunked_elements:
     documents.append(Document(page_content=element.text,
                               metadata=metadata))
 
-#print(documents)
+
 # Convert documentos a JSON
 def document_to_dict(document):
     return {
