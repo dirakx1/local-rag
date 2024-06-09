@@ -30,17 +30,19 @@ def preprocess_pdfs(directory):
     for root, _, files in os.walk(directory):
         for file in files:
             if file.endswith(".pdf"):
+                new_filename = file.replace(" ", "")
+                os.rename(os.path.join(root, file), os.path.join(root, new_filename))
+                file = new_filename
                 elems = partition_pdf(
                     filename=os.path.join(root,file),
                     include_page_breaks=True,
                     infer_table_structure=True,
-                    languages=['esp'], 
+                    languages=['eng', 'esp'], 
                     strategy="fast")
                 elements.extend(elems)
-                
-        return elements
+    return elements
     
-pdf_elements = preprocess_pdfs("pdfscc")
+pdf_elements = preprocess_pdfs("pdfs")
 
 
 # chunking
@@ -53,7 +55,7 @@ for element in chunked_elements:
                               metadata=metadata))
 
 
-# Convert documentos a JSON
+# Convertir documentos a JSON
 def document_to_dict(document):
     return {
         "page_content": document.page_content,
@@ -62,7 +64,7 @@ def document_to_dict(document):
 
 documents_json = json.dumps([document_to_dict(doc) for doc in documents], ensure_ascii=False)
 
-# Convert documentos a JSONL y guardar en un archivo
+# Convertir ocumentos a JSONL y guardar en un archivo
 def save_as_jsonl(documents, filename):
     with open(filename, 'w', encoding='utf-8') as f:
         for document in documents:

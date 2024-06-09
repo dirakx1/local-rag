@@ -1,1 +1,2 @@
-!pip install -q langchain unstructured[all-docs] faiss-cpu
+!pip install -q langchain unstructured[all-docs] faiss-cpu s3fs
+pip install "unstructured[s3]"
