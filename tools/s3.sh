@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# export UNSTRUCTURED_API_KEY=
+# first export UNSTRUCTURED_API_KEY=
 
 unstructured-ingest \
   s3 \
