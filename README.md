@@ -1,4 +1,4 @@
-# Local RAG setup with
+# Local RAG setup with unstructured
 
 ## prerreqs
 * ollama (llama3)
