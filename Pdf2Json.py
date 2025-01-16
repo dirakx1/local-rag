@@ -64,7 +64,7 @@ def document_to_dict(document):
 
 documents_json = json.dumps([document_to_dict(doc) for doc in documents], ensure_ascii=False)
 
-# Convertir ocumentos a JSONL y guardar en un archivo
+# Convertir documentos a JSONL y guardar en un archivo
 def save_as_jsonl(documents, filename):
     with open(filename, 'w', encoding='utf-8') as f:
         for document in documents:
